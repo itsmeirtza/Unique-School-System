@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Top-level background handler
 @pragma('vm:entry-point')
@@ -109,14 +110,37 @@ class PushNotificationService {
   Future<void> subscribeToClass(String className) async {
     final topic = _topicFromClass(className);
     await _messaging.subscribeToTopic(topic);
+    // persist state
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_topicKey(topic), true);
+    await prefs.setString('last_class', className);
     if (kDebugMode) debugPrint('[FCM] Subscribed to topic: $topic');
   }
 
   Future<void> unsubscribeFromClass(String className) async {
     final topic = _topicFromClass(className);
     await _messaging.unsubscribeFromTopic(topic);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_topicKey(topic), false);
     if (kDebugMode) debugPrint('[FCM] Unsubscribed from topic: $topic');
   }
 
+  // Helper to explicitly set subscription and persist
+  Future<void> setSubscriptionForClass(String className, bool enabled) async {
+    if (enabled) {
+      await subscribeToClass(className);
+    } else {
+      await unsubscribeFromClass(className);
+    }
+  }
+
+  // Read persisted subscription state
+  Future<bool> isSubscribedToClass(String className) async {
+    final topic = _topicFromClass(className);
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_topicKey(topic)) ?? false;
+  }
+
   String _topicFromClass(String s) => 'class_${s.toLowerCase().replaceAll(RegExp(r"[^a-z0-9]+"), '_')}';
+  String _topicKey(String topic) => 'subscribed_$topic';
 }

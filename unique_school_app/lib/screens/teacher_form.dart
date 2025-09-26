@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/push_notifications.dart';
 
 class TeacherForm extends StatefulWidget {
   @override
@@ -33,8 +34,11 @@ class _TeacherFormState extends State<TeacherForm> {
           }),
           ElevatedButton.icon(onPressed: addSubject, icon: Icon(Icons.add), label: Text('Add Subject')),
           SizedBox(height:12),
-          ElevatedButton(onPressed: (){
+          ElevatedButton(onPressed: () async {
             // TODO: Save teacher profile with subject template
+            if (className.trim().isNotEmpty) {
+              await PushNotificationService.instance.setSubscriptionForClass(className, true);
+            }
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Saved locally (stub).')));
             Navigator.pushReplacementNamed(context, '/dashboard');
           }, child: Text('Continue'))

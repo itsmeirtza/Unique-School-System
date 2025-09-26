@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/push_notifications.dart';
 
 class ParentForm extends StatefulWidget {
   @override
@@ -41,8 +42,15 @@ class _ParentFormState extends State<ParentForm> {
             }),
             ElevatedButton.icon(onPressed: addChild, icon: Icon(Icons.add), label: Text('Add Child')),
             SizedBox(height:12),
-            ElevatedButton(onPressed: (){
+            ElevatedButton(onPressed: () async {
               // TODO: Save to Firestore -> users + students
+              // Auto-subscribe to each child's class
+              for (final c in children) {
+                final className = c['class'] ?? '';
+                if (className.trim().isNotEmpty) {
+                  await PushNotificationService.instance.setSubscriptionForClass(className, true);
+                }
+              }
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Saved locally (stub).')));
               Navigator.pushReplacementNamed(context, '/dashboard');
             }, child: Text('Continue'))
