@@ -9,12 +9,22 @@ const fs = require('fs');
 const path = require('path');
 const admin = require('firebase-admin');
 
-// Initialize Admin SDK using Application Default Credentials (service account via env var)
-admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
-  // projectId is inferred from the service account; optionally override via env FIREBASE_PROJECT_ID
-  projectId: process.env.FIREBASE_PROJECT_ID,
-});
+// Initialize Admin SDK
+const useEmulator = !!process.env.FIRESTORE_EMULATOR_HOST;
+if (useEmulator) {
+  // Emulator does not require credentials
+  admin.initializeApp({
+    projectId: process.env.FIREBASE_PROJECT_ID || 'demo-unique-school',
+  });
+  console.log(`Using Firestore emulator at ${process.env.FIRESTORE_EMULATOR_HOST}`);
+} else {
+  // Production/staging: requires Application Default Credentials (service account)
+  admin.initializeApp({
+    credential: admin.credential.applicationDefault(),
+    // projectId is inferred from the service account; optionally override via env FIREBASE_PROJECT_ID
+    projectId: process.env.FIREBASE_PROJECT_ID,
+  });
+}
 
 const db = admin.firestore();
 
