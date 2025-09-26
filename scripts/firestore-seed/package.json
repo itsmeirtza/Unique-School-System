@@ -1,0 +1,15 @@
+{
+  "name": "firestore-seed",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Array-based Firestore seed for Unique School System (supports NOW placeholder)",
+  "main": "seed.js",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "firebase-admin": "^12.6.0",
+    "slugify": "^1.6.6"
+  },
+  "scripts": {
+    "seed": "node seed.js"
+  }
+}

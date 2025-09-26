@@ -1,0 +1,28 @@
+{
+  "classes": [
+    {"name":"PG","teacherId":"TBD","createdAt":"NOW"},
+    {"name":"Nursery","teacherId":"TBD","createdAt":"NOW"},
+    {"name":"KG","teacherId":"TBD","createdAt":"NOW"},
+    {"name":"Class 1","teacherId":"TBD","createdAt":"NOW"},
+    {"name":"Class 2","teacherId":"TBD","createdAt":"NOW"},
+    {"name":"Class 3","teacherId":"TBD","createdAt":"NOW"},
+    {"name":"Class 4","teacherId":"TBD","createdAt":"NOW"},
+    {"name":"Class 5","teacherId":"TBD","createdAt":"NOW"},
+    {"name":"Class 6","teacherId":"TBD","createdAt":"NOW"},
+    {"name":"Class 7","teacherId":"TBD","createdAt":"NOW"},
+    {"name":"Class 8","teacherId":"TBD","createdAt":"NOW"},
+    {"name":"Class 9","teacherId":"TBD","createdAt":"NOW"},
+    {"name":"Class 10","teacherId":"TBD","createdAt":"NOW"}
+  ],
+  "users": [
+    {"name":"Ali Ahmad","email":"ali@example.com","role":"teacher","createdAt":"NOW"},
+    {"name":"Sara Khan","email":"sara@example.com","role":"parent","createdAt":"NOW"}
+  ],
+  "students": [
+    {"name":"Ahmed Ali","fatherName":"Ali Ahmad","className":"Class 5","parentEmail":"sara@example.com","createdAt":"NOW"},
+    {"name":"Zoya Ali","fatherName":"Ali Ahmad","className":"Class 2","parentEmail":"sara@example.com","createdAt":"NOW"}
+  ],
+  "stars": [
+    {"className":"Class 5","studentName":"Ahmed Ali","month":"September 2025","createdAt":"NOW"}
+  ]
+}
