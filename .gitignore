@@ -5,6 +5,9 @@ Thumbs.db
 .idea/
 *.iml
 
+# Node
+**/node_modules/
+
 # Flutter
 **/.dart_tool/
 **/.packages
