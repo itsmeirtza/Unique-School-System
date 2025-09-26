@@ -80,7 +80,7 @@ class AppTheme {
       ),
 
       // Card Theme
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
@@ -180,19 +180,19 @@ class AppTheme {
       ),
 
       // Dialog Theme
-      dialogTheme: const DialogTheme(
+      dialogTheme: DialogThemeData(
         elevation: 8,
         backgroundColor: neutralWhite,
         surfaceTintColor: Colors.transparent,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
-        titleTextStyle: TextStyle(
+        titleTextStyle: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w600,
           color: neutralGray900,
         ),
-        contentTextStyle: TextStyle(
+        contentTextStyle: const TextStyle(
           fontSize: 16,
           color: neutralGray700,
         ),
@@ -372,7 +372,7 @@ class AppTheme {
       ),
 
       // Card Theme
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
