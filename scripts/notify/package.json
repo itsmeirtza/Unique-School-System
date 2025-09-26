@@ -1,0 +1,14 @@
+{
+  "name": "notify-scripts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Send FCM messages to token or topic using Firebase Admin",
+  "main": "send.js",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "firebase-admin": "^12.6.0"
+  },
+  "scripts": {
+    "send": "node send.js"
+  }
+}

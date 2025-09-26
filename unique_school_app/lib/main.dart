@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'services/push_notifications.dart';
 import 'screens/splash_screen.dart';
 import 'screens/home_dashboard.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Register background handler as early as possible
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+
   await Firebase.initializeApp();
+
+  // Initialize notifications (permissions, token, channels)
+  await PushNotificationService.instance.initialize();
+
   runApp(MyApp());
 }
 
