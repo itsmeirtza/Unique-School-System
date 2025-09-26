@@ -1,0 +1,16 @@
+# General
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.iml
+
+# Flutter
+**/.dart_tool/
+**/.packages
+**/build/
+**/.gradle/
+**/.android/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/ios/Pods/

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "264722977577",
+    "project_id": "unique-school-system-d2961",
+    "storage_bucket": "unique-school-system-d2961.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264722977577:android:d3dc30958d20e6bdc91d38",
+        "android_client_info": {
+          "package_name": "com.uniqueschool.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQLwV0E-LZJeqg17XMFPjlQCOZbGxIA60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
