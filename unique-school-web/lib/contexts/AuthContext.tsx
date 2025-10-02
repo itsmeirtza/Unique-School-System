@@ -25,7 +25,7 @@ interface AuthContextType {
   loading: boolean;
   error: string;
   signIn: (email: string, password: string, role: string) => Promise<boolean>;
-  signUp: (email: string, password: string, role: string, additionalData: any) => Promise<boolean>;
+  signUp: (email: string, password: string, role: string, additionalData: Record<string, unknown>) => Promise<boolean>;
   logout: () => Promise<void>;
   resetPassword: (email: string) => Promise<boolean>;
   clearError: () => void;
@@ -66,6 +66,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const signIn = async (email: string, password: string, role: string): Promise<boolean> => {
+    if (!auth || !db) {
+      setError('Authentication not initialized');
+      return false;
+    }
+    
     try {
       setLoading(true);
       setError('');
@@ -73,22 +78,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       // Verify role
       const userDoc = await getDoc(doc(db, 'users', result.user.uid));
-      if (userDoc.exists() && userDoc.data().role !== role) {
-        setError(`Please use the ${userDoc.data().role} portal to sign in.`);
+      if (userDoc.exists() && userDoc.data()?.role !== role) {
+        setError(`Please use the ${userDoc.data()?.role} portal to sign in.`);
         await signOut(auth);
         return false;
       }
       
       return true;
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : 'Sign in failed');
       return false;
     } finally {
       setLoading(false);
     }
   };
 
-  const signUp = async (email: string, password: string, role: string, additionalData: any): Promise<boolean> => {
+  const signUp = async (email: string, password: string, role: string, additionalData: Record<string, unknown>): Promise<boolean> => {
+    if (!auth || !db) {
+      setError('Authentication not initialized');
+      return false;
+    }
+    
     try {
       setLoading(true);
       setError('');
@@ -104,8 +114,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       });
       
       return true;
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : 'Sign up failed');
       return false;
     } finally {
       setLoading(false);
@@ -113,19 +123,29 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const logout = async (): Promise<void> => {
+    if (!auth) {
+      setError('Authentication not initialized');
+      return;
+    }
+    
     try {
       await signOut(auth);
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : 'Logout failed');
     }
   };
 
   const resetPassword = async (email: string): Promise<boolean> => {
+    if (!auth) {
+      setError('Authentication not initialized');
+      return false;
+    }
+    
     try {
       await sendPasswordResetEmail(auth, email);
       return true;
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : 'Password reset failed');
       return false;
     }
   };

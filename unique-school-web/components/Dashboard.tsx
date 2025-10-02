@@ -1,7 +1,7 @@
 'use client';
 
 import { useAuth } from '@/lib/contexts/AuthContext';
-import { LogOut, Users, BookOpen, Calendar, BarChart } from 'lucide-react';
+import { LogOut, Users, BookOpen, Calendar } from 'lucide-react';
 
 export default function Dashboard() {
   const { userData, logout } = useAuth();

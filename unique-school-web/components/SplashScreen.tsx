@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { School, Users, ArrowRight, BookOpen } from 'lucide-react';
+import { School } from 'lucide-react';
 import RoleDialog from './RoleDialog';
 
 export default function SplashScreen() {
